@@ -1,0 +1,51 @@
+version: '3'
+services:
+  # DB
+  db_comunidad:
+    image: postgres:16
+    container_name: db_comunidad
+    volumes:
+      - pgdata_comunidad:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: comunidad_db
+      POSTGRES_USER: user_db
+      POSTGRES_PASSWORD: test_123
+    ports:
+      - "5441:5432"
+  # DB TEST
+  db_comunidad_test:
+    image: postgres:16
+    container_name: db_comunidad_test
+    volumes:
+      - pgdata_comunidad_test:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: comunidad_db_test
+      POSTGRES_USER: user_db
+      POSTGRES_PASSWORD: test_123
+    ports:
+      - "5443:5432"
+
+  # API
+  api_comunidad:
+    build: .
+    container_name: api_comunidad
+    volumes:
+      - .:/app
+      - ./config/master.key:/app/config/master.key
+    environment:
+      DB_HOSTNAME: db_comunidad
+      DB_NAME: comunidad_db
+      DB_HOSTNAME_TEST: db_comunidad_test
+      DB_NAME_TEST: comunidad_db_test
+      DB_USERNAME: user_db
+      DB_PASSWORD: test_123
+      DB_PORT: 5432
+      RABBITMQ_HOST: rabbitmq
+    ports:
+      - "3005:3000"
+    depends_on:
+      - db_comunidad
+
+volumes:
+  pgdata_comunidad:
+  pgdata_comunidad_test:
