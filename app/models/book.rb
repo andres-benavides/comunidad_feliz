@@ -3,4 +3,8 @@ class Book < ApplicationRecord
 
   validates :title, :author, presence: true
 
+  def rating_summary
+    BookRatingCalculator.call(self)
+  end
+
 end

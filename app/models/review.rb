@@ -5,4 +5,6 @@ class Review < ApplicationRecord
   validates :rating, presence: true, inclusion: { in: 1..5 }
   validates :content, length: { maximum: 1000 }, allow_nil: true
 
+  scope :from_active_users, -> { joins(:user).where(users: { banned: false }) }
+
 end

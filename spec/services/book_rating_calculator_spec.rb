@@ -32,7 +32,7 @@ RSpec.describe BookRatingCalculator, type: :service do
 
       res = described_class.call(book)
       expect(res.count).to eq(3)
-      expect(res.average).to eq(4.0) # (5+4+3)/3 = 4.0
+      expect(res.average).to eq(4.0)
       expect(res.status).to be_nil
     end
   end
@@ -45,12 +45,12 @@ RSpec.describe BookRatingCalculator, type: :service do
 
       create(:review, book: book, user: active1, rating: 5)
       create(:review, book: book, user: active2, rating: 1)
-      create(:review, book: book, user: banned,  rating: 5) # no cuenta
+      create(:review, book: book, user: banned,  rating: 5)
 
       res = described_class.call(book)
       expect(res.count).to eq(2)
-      expect(res.average).to eq(3.0) # (5+1)/2 = 3.0
-      expect(res.status).to be_nil # hay 2? ojo: con 2 válidas sería insuficiente
+      expect(res.average).to be_nil
+      expect(res.status).to eq('Reseñas Insuficientes')
     end
   end
 
@@ -69,11 +69,9 @@ RSpec.describe BookRatingCalculator, type: :service do
 
   context 'redondeo a 1 decimal' do
     it 'redondea correctamente' do
-      # Promedio 3.1666... -> 3.2
-      [3, 3, 3, 4, 3, 3].first(3).each_with_index do |rating, i|
+      [3, 3, 4, 4, 3, 3].first(3).each_with_index do |rating, i|
         create(:review, book: book, user: create(:user, name: "U#{i}"), rating: rating)
       end
-      # ratings: 3,3,4 -> avg = 3.3333 -> redondeo 3.3 (ajusta a tu caso de prueba preferido)
       res = described_class.call(book)
       expect(res.count).to eq(3)
       expect(res.average).to eq(3.3)
