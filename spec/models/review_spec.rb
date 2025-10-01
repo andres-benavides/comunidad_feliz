@@ -10,17 +10,17 @@ RSpec.describe Review, type: :model do
   it { is_expected.to validate_presence_of(:rating) }
   it { is_expected.to validate_inclusion_of(:rating).in_range(1..5) }
 
-  it 'permite content nil' do
+  it 'allows content nil' do
     review = build(:review, content: nil)
     expect(review).to be_valid
   end
 
-  it 'no permite content > 1000 chars' do
+  it 'does not allow content > 1000 chars' do
     review = build(:review, content: 'a' * 1001)
     expect(review).not_to be_valid
   end
 
-  it 'scope from_active_users excluye baneados' do
+  it 'scope from_active_users excludes banned' do
     active = create(:user)
     banned = create(:user, :banned)
     book = create(:book)

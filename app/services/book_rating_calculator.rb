@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class BookRatingCalculator
   Result = Struct.new(:average, :count, :status, keyword_init: true)
 
-  INSUFFICIENT_LABEL = 'Reseñas Insuficientes'.freeze
+  INSUFFICIENT_LABEL = 'Insufficient Reviews'.freeze
 
   def self.call(book)
     new(book).call
