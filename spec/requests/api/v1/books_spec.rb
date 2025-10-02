@@ -15,7 +15,7 @@ RSpec.describe 'Api::V1::Books', type: :request do
       expect(json.size).to eq(3)
 
       first = json.first
-      expect(first.keys).to contain_exactly('id', 'title', 'author')
+      expect(first.keys).to contain_exactly('id', 'title', 'author', 'rating_summary')
     end
   end
 end

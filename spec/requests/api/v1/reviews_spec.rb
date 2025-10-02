@@ -18,7 +18,7 @@ RSpec.describe 'Api::V1::Reviews', type: :request do
       item = json.first
       expect(item.keys).to contain_exactly('id', 'rating', 'content', 'created_at', 'user', 'book')
       expect(item['user'].keys).to contain_exactly('id', 'name', 'banned')
-      expect(item['book'].keys).to contain_exactly('id', 'title', 'author')
+      expect(item['book'].keys).to contain_exactly('id', 'title', 'author','rating_summary')
     end
   end
 

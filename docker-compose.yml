@@ -42,7 +42,7 @@ services:
       DB_PORT: 5432
       RABBITMQ_HOST: rabbitmq
     ports:
-      - "3005:3000"
+      - "3005:3005"
     depends_on:
       - db_comunidad
 
