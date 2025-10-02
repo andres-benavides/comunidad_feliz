@@ -2,5 +2,5 @@
 
 set -e
 
-echo "🧹 Stoping containers..."
+echo "Stoping containers..."
 docker compose down

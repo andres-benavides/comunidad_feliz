@@ -59,6 +59,23 @@ o ejecutar:
 docker compose up -d
 ```
 
+## Detener el servidor
+
+Puedes usar el script para detener el servidor
+
+Asegúrate de darle permisos de ejecución:
+
+```bash
+chmod +x stop_project.sh
+./stop_project.sh
+```
+
+o ejecutar:
+
+```bash
+docker compose down
+```
+
 ## Endpoints
 
 Base URL por defecto: http://localhost:3005
