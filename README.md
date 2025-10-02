@@ -111,7 +111,7 @@ O dentro del proyecto hay una coleccion de postman para probar los endpoints com
 
 ## Seeds
 
-db/seeds.rb crea 3 usuarios y 3 libros para comenzar a crear reseñas. Puedes ejecutarlo manualmente si lo necesitas:
+db/seeds.rb crea 3 usuarios y 3 libros para comenzar a crear reseñas, pero al ejecutar init_project.sh se debieron crear los seeds. Puedes ejecutarlo manualmente si lo necesitas:
 
 ```bash
 docker compose exec api_comunidad bin/rails db:seed
@@ -119,7 +119,7 @@ docker compose exec api_comunidad bin/rails db:seed
 
 ## Pruebas automatizadas
 
-Las pruebas, con el contenedor levantado, se ejecutan con el script:
+Las pruebas, con el contenedor iniciado, se ejecutan con el script:
 
 ```bash
 chmod +x run_test.sh
